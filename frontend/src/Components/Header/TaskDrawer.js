@@ -22,7 +22,7 @@ class TaskDrawer extends Component {
             <AssessmentIcon />
           </ListItemIcon>
           <ListItemText>
-            Task {task.task}
+            Task {task.task} ( {task.algo} )
           </ListItemText>
         </ListItem>
       </div>

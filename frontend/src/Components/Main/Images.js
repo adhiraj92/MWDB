@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Coverflow from 'react-coverflow';
 import Button from '@material-ui/core/Button';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { StyleRoot } from 'radium';
 import { styles } from '../Header/Styles/Header'
 import { withStyles } from '@material-ui/core/styles';
@@ -17,8 +18,12 @@ class Images extends Component {
     this.setState({task: nextProps.task, cluster: nextProps.cluster, active: nextProps.active});
   }
 
-  handleClick = () => {
-    const imageCount = this.state.task.images[0].length;
+  handleFirst = () => {
+    this.setState({active: 0});
+  }
+
+  handleRandom = () => {
+    const imageCount = this.state.task.images[this.state.cluster].length;
     const num = Math.floor(Math.random() * Math.floor(imageCount));
 
     this.setState({active: num});
@@ -34,7 +39,11 @@ class Images extends Component {
     const { images } = task;
 
     const imageList = images && images[cluster] && images[cluster].map((imageId, i) =>
-      <img key={i} src={'/img/' + imageId + '.jpg'} alt="Loading Image..." />
+      <LazyLoadImage
+        key={i}
+        alt='Image Not Found'
+        src={'/img/' + imageId + '.jpg'}
+      />
     );
 
     return (
@@ -42,10 +51,16 @@ class Images extends Component {
         { images &&
           <div className={classes.maxwidth}>
             <Button
+              className={classes.buttonGreen}
+              variant="contained"
+              onClick={this.handleFirst.bind(this)}>
+                First Image
+            </Button>
+            <Button
               color="secondary"
               className={classes.button}
               variant="contained"
-              onClick={this.handleClick.bind(this)}>
+              onClick={this.handleRandom.bind(this)}>
                 Choose Random Image
             </Button>
             <StyleRoot>

@@ -1,4 +1,4 @@
-const drawerWidth = 240;
+const drawerWidth = 340;
 
 export const styles = (theme) => ({
   root: {
@@ -27,6 +27,12 @@ export const styles = (theme) => ({
   },
   button: {
     marginBottom: 10,
+  },
+  buttonGreen: {
+    marginBottom: 10,
+    marginRight: 10,
+    backgroundColor: 'green',
+    color: 'white',
   },
   maxwidth: {
     width: '100%',

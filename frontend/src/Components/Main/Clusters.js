@@ -45,18 +45,26 @@ class Clusters extends React.Component {
     const { classes } = this.props;
     const { task, value } = this.state;
 
-    const tabs = task.images && task.images.map((cluster, i) =>
-      <Tab key={i} label={'Cluster ' + (i+1) + ' ( ' + cluster.length + ' images )'} />
+    const tabs = task && task.images && task.mapping && task.images.map((cluster, i) =>
+      task.hasInputImages && i === 0 ?
+      <Tab key={i} label='Input Images' /> :
+      <Tab key={i} label={task.mapping[i] + ' ( ' + cluster.length + ' images )'} />
     );
 
     return (
+      task ?
       <div className={classes.root}>
         <AppBar position="static" style={{ backgroundColor: '#A9A9A9' }} >
           <Tabs value={value} onChange={this.handleChange}>
             {tabs}
           </Tabs>
         </AppBar>
-        <TabContainer><Images task={this.state.task} cluster={value} active={0} /></TabContainer>
+        <TabContainer>
+          <Images task={this.state.task} cluster={value} active={0} />
+        </TabContainer>
+      </div> :
+      <div>
+        No Task Run Yet
       </div>
     );
   }
