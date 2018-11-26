@@ -34,6 +34,12 @@ Before running and testing the programs included in this project, follow the bel
   or
   Unzip the visualization code from MYASU and copy into some directory.
 
+**Copy all images to public folder**
+1. cd MWDB/frontend/public
+2. mkdir img
+3. cd img
+4. Paste all the images into this folder
+
 
 Running the Code
 -----------------
