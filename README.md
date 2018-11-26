@@ -5,6 +5,7 @@ Description
 -----------
 The goal for this project is to provide a visual representation of the task input and output data.
 The user will have control over which task results to view and can scroll through the resulting images.
+Node.js and React.js are the technologies used to implement the backend and frontend part of the code. MongoDB is used as the database to store the input and output data.
 
 Getting Started
 ---------------
@@ -18,9 +19,20 @@ Before running and testing the programs included in this project, follow the bel
 1. Download and install Node and npm
 2. Installation instructions can be found at https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
+**Download Git**
+1. Download and install git
+2. Installation instructions can be found at https://www.atlassian.com/git/tutorials/install-git
+
+**Download MongoDB**
+1. Download and install MongoDB
+2. Installation instructions can be found at https://docs.mongodb.com/manual/installation/
+3. Run MongoDB server in the background
+
 **Download the repository**
 1. Open the command prompt or git bash
 2. git clone https://github.com/adhiraj92/MWDB.git
+  or
+  Unzip the visualization code from MYASU and copy into some directory.
 
 
 Running the Code
