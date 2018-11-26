@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Coverflow from 'react-coverflow';
 import Button from '@material-ui/core/Button';
+import Pagination from './Pagination';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { StyleRoot } from 'radium';
 import { styles } from '../Header/Styles/Header'
@@ -11,6 +12,7 @@ class Images extends Component {
   state = {
     active: 0,
     cluster: 0,
+    pageOfItems: [],
     task: {},
   };
 
@@ -33,36 +35,21 @@ class Images extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  onChangePage = (pageOfItems) => {
+    this.setState({ pageOfItems: pageOfItems });
+  }
+
   render() {
     const { classes } = this.props;
-    const { task, cluster } = this.state;
+    const { cluster, pageOfItems, task} = this.state;
     const { images } = task;
 
-    const imageList = images && images[cluster] && images[cluster].map((imageId, i) =>
-      <LazyLoadImage
-        key={i}
-        alt='Image Not Found'
-        src={'/img/' + imageId + '.jpg'}
-      />
-    );
+    const imageList = images && images[cluster];
 
     return (
       <div className={classes.root}>
         { images &&
           <div className={classes.maxwidth}>
-            <Button
-              className={classes.buttonGreen}
-              variant="contained"
-              onClick={this.handleFirst.bind(this)}>
-                First Image
-            </Button>
-            <Button
-              color="secondary"
-              className={classes.button}
-              variant="contained"
-              onClick={this.handleRandom.bind(this)}>
-                Choose Random Image
-            </Button>
             <StyleRoot>
               <Coverflow
                 height={860}
@@ -83,9 +70,18 @@ class Images extends Component {
                   }
                 }}
               >
-                {imageList}
+                {
+                  this.state.pageOfItems.map((imageId, i) =>
+                    <LazyLoadImage
+                      key={i}
+                      alt='Image Not Found'
+                      src={'/img/' + imageId + '.jpg'}
+                    />
+                  )
+                }
               </Coverflow>
             </StyleRoot>
+            <Pagination items={imageList} onChangePage={this.onChangePage} />
           </div>
         }
       </div>
